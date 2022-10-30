@@ -13,10 +13,10 @@ type CreateUser struct {
 }
 
 type CreateUserInput struct {
-	name     string
-	username string
-	email    string
-	password string
+	Name     string `json:"name"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type CreateUserOutput struct {
@@ -32,17 +32,17 @@ func NewCreateUser(
 }
 
 func (c *CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
-	existingUser := c.userRepository.FindByEmail(input.email)
+	existingUser := c.userRepository.FindByEmail(input.Email)
 	if existingUser != nil {
 		return CreateUserOutput{}, errors.New("user already exists")
 	}
 	userId := uuid.NewString()
 	user, errUser := entity.NewUser(
 		userId,
-		input.name,
-		input.username,
-		input.email,
-		input.password,
+		input.Name,
+		input.Username,
+		input.Email,
+		input.Password,
 	)
 	if errUser != nil {
 		return CreateUserOutput{}, errUser
