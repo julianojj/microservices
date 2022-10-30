@@ -7,6 +7,32 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestNotShouldCreateUserIfInvalidEmail(t *testing.T) {
+	userRepository := memory.NewCreateUserRepository()
+	createUser := NewCreateUser(userRepository)
+	inputCreateUser := CreateUserInput{
+		"any_user",
+		"any_username",
+		"any_emailtest.com",
+		"any_password",
+	}
+	_, err := createUser.Execute(inputCreateUser)
+	assert.EqualError(t, err, "invalid email")
+}
+
+func TestNotShouldCreateUserIfInvalidPassword(t *testing.T) {
+	userRepository := memory.NewCreateUserRepository()
+	createUser := NewCreateUser(userRepository)
+	inputCreateUser := CreateUserInput{
+		"any_user",
+		"any_username",
+		"any_email@test.com",
+		"12345",
+	}
+	_, err := createUser.Execute(inputCreateUser)
+	assert.EqualError(t, err, "invalid password")
+}
+
 func TestNotShouldCreateUserIfUserAlreadyExists(t *testing.T) {
 	userRepository := memory.NewCreateUserRepository()
 	createUser := NewCreateUser(userRepository)
