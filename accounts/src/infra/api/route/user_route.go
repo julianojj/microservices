@@ -23,6 +23,10 @@ func NewUserRoute(
 
 func (u *UserRoute) Init() {
 	u.app.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
-		u.userController.Handle(w, r)
+		w.Header().Set("Content-Type", "application/json")
+		if r.Method == "POST" {
+			u.userController.Handle(w, r)
+			return
+		}
 	})
 }
