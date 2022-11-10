@@ -3,13 +3,15 @@ package usecase
 import (
 	"testing"
 
+	"github.com/julianojj/microservices/accounts/src/infra/adapters"
 	"github.com/julianojj/microservices/accounts/src/infra/repository/memory"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNotShouldCreateUserIfInvalidEmail(t *testing.T) {
 	userRepository := memory.NewCreateUserRepository()
-	createUser := NewCreateUser(userRepository)
+	bcrypt := adapters.NewBcrypt()
+	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
 		"any_user",
 		"any_username",
@@ -22,7 +24,8 @@ func TestNotShouldCreateUserIfInvalidEmail(t *testing.T) {
 
 func TestNotShouldCreateUserIfInvalidPassword(t *testing.T) {
 	userRepository := memory.NewCreateUserRepository()
-	createUser := NewCreateUser(userRepository)
+	bcrypt := adapters.NewBcrypt()
+	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
 		"any_user",
 		"any_username",
@@ -35,7 +38,8 @@ func TestNotShouldCreateUserIfInvalidPassword(t *testing.T) {
 
 func TestNotShouldCreateUserIfUserAlreadyExists(t *testing.T) {
 	userRepository := memory.NewCreateUserRepository()
-	createUser := NewCreateUser(userRepository)
+	bcrypt := adapters.NewBcrypt()
+	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
 		"any_user",
 		"any_username",
@@ -49,7 +53,8 @@ func TestNotShouldCreateUserIfUserAlreadyExists(t *testing.T) {
 
 func TestShouldCreateUser(t *testing.T) {
 	userRepository := memory.NewCreateUserRepository()
-	createUser := NewCreateUser(userRepository)
+	bcrypt := adapters.NewBcrypt()
+	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
 		"any_user",
 		"any_username",
