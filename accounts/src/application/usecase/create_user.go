@@ -6,10 +6,12 @@ import (
 	"github.com/google/uuid"
 	"github.com/julianojj/microservices/accounts/src/domain/entity"
 	"github.com/julianojj/microservices/accounts/src/domain/repository"
+	"github.com/julianojj/microservices/accounts/src/infra/adapters"
 )
 
 type CreateUser struct {
 	userRepository repository.UserRepository
+	hash           adapters.Hash
 }
 
 type CreateUserInput struct {
@@ -25,28 +27,32 @@ type CreateUserOutput struct {
 
 func NewCreateUser(
 	userRepository repository.UserRepository,
+	hash adapters.Hash,
 ) *CreateUser {
 	return &CreateUser{
 		userRepository,
+		hash,
 	}
 }
 
 func (c *CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
-	existingUser := c.userRepository.FindByEmail(input.Email)
-	if existingUser != nil {
-		return CreateUserOutput{}, errors.New("user already exists")
-	}
 	userId := uuid.NewString()
-	user, errUser := entity.NewUser(
+	user, err := entity.NewUser(
 		userId,
 		input.Name,
 		input.Username,
 		input.Email,
 		input.Password,
 	)
-	if errUser != nil {
-		return CreateUserOutput{}, errUser
+	if err != nil {
+		return CreateUserOutput{}, err
 	}
+	existingUser := c.userRepository.FindByEmail(user.Email)
+	if existingUser != nil {
+		return CreateUserOutput{}, errors.New("user already exists")
+	}
+	encryptedPassword, _ := c.hash.Encrypt([]byte(user.Password))
+	user.Password = string(encryptedPassword)
 	c.userRepository.Save(user)
 	return CreateUserOutput{
 		id: userId,
