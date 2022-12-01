@@ -20,19 +20,43 @@ func NewUser(
 	email string,
 	password string,
 ) (*User, error) {
-	if isInvalidEmail(email) {
-		return nil, errors.New("invalid email")
-	}
-	if isInvalidPassword(password) {
-		return nil, errors.New("invalid password")
-	}
-	return &User{
+	user := &User{
 		id,
 		name,
 		username,
 		email,
 		password,
-	}, nil
+	}
+	err := user.IsValid()
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (u *User) IsValid() error {
+	if u.Id == "" {
+		return errors.New("id is required")
+	}
+	if u.Name == "" {
+		return errors.New("name is required")
+	}
+	if u.Username == "" {
+		return errors.New("username is required")
+	}
+	if u.Email == "" {
+		return errors.New("email is required")
+	}
+	if u.Password == "" {
+		return errors.New("password is required")
+	}
+	if isInvalidEmail(u.Email) {
+		return errors.New("invalid email")
+	}
+	if isInvalidPassword(u.Password) {
+		return errors.New("invalid password")
+	}
+	return nil
 }
 
 func isInvalidEmail(email string) bool {
