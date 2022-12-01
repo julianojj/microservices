@@ -6,7 +6,7 @@ type UserRepositoryMemory struct {
 	users []*entity.User
 }
 
-func NewCreateUserRepository() *UserRepositoryMemory {
+func NewUserRepository() *UserRepositoryMemory {
 	return &UserRepositoryMemory{}
 }
 
