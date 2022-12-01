@@ -9,7 +9,7 @@ import (
 )
 
 func TestNotShouldCreateUserIfInvalidEmail(t *testing.T) {
-	userRepository := memory.NewCreateUserRepository()
+	userRepository := memory.NewUserRepository()
 	bcrypt := adapters.NewBcrypt()
 	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
@@ -23,7 +23,7 @@ func TestNotShouldCreateUserIfInvalidEmail(t *testing.T) {
 }
 
 func TestNotShouldCreateUserIfInvalidPassword(t *testing.T) {
-	userRepository := memory.NewCreateUserRepository()
+	userRepository := memory.NewUserRepository()
 	bcrypt := adapters.NewBcrypt()
 	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
@@ -37,7 +37,7 @@ func TestNotShouldCreateUserIfInvalidPassword(t *testing.T) {
 }
 
 func TestNotShouldCreateUserIfUserAlreadyExists(t *testing.T) {
-	userRepository := memory.NewCreateUserRepository()
+	userRepository := memory.NewUserRepository()
 	bcrypt := adapters.NewBcrypt()
 	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{
@@ -52,7 +52,7 @@ func TestNotShouldCreateUserIfUserAlreadyExists(t *testing.T) {
 }
 
 func TestShouldCreateUser(t *testing.T) {
-	userRepository := memory.NewCreateUserRepository()
+	userRepository := memory.NewUserRepository()
 	bcrypt := adapters.NewBcrypt()
 	createUser := NewCreateUser(userRepository, bcrypt)
 	inputCreateUser := CreateUserInput{

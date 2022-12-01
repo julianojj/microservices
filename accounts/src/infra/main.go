@@ -19,7 +19,7 @@ func main() {
 		Addr:    fmt.Sprintf(":%d", port),
 		Handler: mux,
 	}
-	userRepository := memory.NewCreateUserRepository()
+	userRepository := memory.NewUserRepository()
 	bcrypt := adapters.NewBcrypt()
 	createUser := usecase.NewCreateUser(userRepository, bcrypt)
 	createUserController := controller.NewCreateUserController(createUser)
