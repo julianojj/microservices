@@ -1,11 +1,13 @@
 version: '3.9'
 services:
   accounts:
-    build: ./Dockerfile
+    build:
+      context: ./
+      dockerfile: Dockerfile
     container_name: accounts
     command: go run ./...
     ports:
       - '8000:8000'
     volumes:
-      - ./:/usr/internal/app
+      - ./:/usr/src/app
     restart: always
