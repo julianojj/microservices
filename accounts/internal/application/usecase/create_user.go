@@ -4,9 +4,9 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	"github.com/julianojj/microservices/accounts/src/domain/entity"
-	"github.com/julianojj/microservices/accounts/src/domain/repository"
-	"github.com/julianojj/microservices/accounts/src/infra/adapters"
+	"github.com/julianojj/microservices/accounts/internal/domain/entity"
+	"github.com/julianojj/microservices/accounts/internal/domain/repository"
+	"github.com/julianojj/microservices/accounts/internal/infra/adapters"
 )
 
 type CreateUser struct {

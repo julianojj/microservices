@@ -3,7 +3,7 @@ package route
 import (
 	"net/http"
 
-	"github.com/julianojj/microservices/accounts/src/infra/api/controller"
+	"github.com/julianojj/microservices/accounts/internal/infra/api/controller"
 )
 
 type UserRoute struct {

@@ -1,6 +1,6 @@
 package memory
 
-import "github.com/julianojj/microservices/accounts/src/domain/entity"
+import "github.com/julianojj/microservices/accounts/internal/domain/entity"
 
 type UserRepositoryMemory struct {
 	users []*entity.User

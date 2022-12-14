@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/julianojj/microservices/accounts/src/domain/entity"
+import "github.com/julianojj/microservices/accounts/internal/domain/entity"
 
 type UserRepository interface {
 	Save(user *entity.User)

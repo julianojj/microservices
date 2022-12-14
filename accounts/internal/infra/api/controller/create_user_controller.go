@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/julianojj/microservices/accounts/src/application/usecase"
+	"github.com/julianojj/microservices/accounts/internal/application/usecase"
 )
 
 type CreateUserController struct {

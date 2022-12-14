@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/julianojj/microservices/accounts/src/application/usecase"
-	"github.com/julianojj/microservices/accounts/src/infra/adapters"
-	"github.com/julianojj/microservices/accounts/src/infra/api/controller"
-	"github.com/julianojj/microservices/accounts/src/infra/api/route"
-	"github.com/julianojj/microservices/accounts/src/infra/repository/memory"
+	"github.com/julianojj/microservices/accounts/internal/application/usecase"
+	"github.com/julianojj/microservices/accounts/internal/infra/adapters"
+	"github.com/julianojj/microservices/accounts/internal/infra/api/controller"
+	"github.com/julianojj/microservices/accounts/internal/infra/api/route"
+	"github.com/julianojj/microservices/accounts/internal/infra/repository/memory"
 )
 
 func main() {

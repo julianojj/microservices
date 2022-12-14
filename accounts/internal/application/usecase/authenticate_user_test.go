@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/julianojj/microservices/accounts/src/domain/entity"
-	"github.com/julianojj/microservices/accounts/src/infra/adapters"
-	"github.com/julianojj/microservices/accounts/src/infra/repository/memory"
+	"github.com/julianojj/microservices/accounts/internal/domain/entity"
+	"github.com/julianojj/microservices/accounts/internal/infra/adapters"
+	"github.com/julianojj/microservices/accounts/internal/infra/repository/memory"
 	"github.com/stretchr/testify/assert"
 )
 
