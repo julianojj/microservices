@@ -1,5 +1,5 @@
 FROM golang
-WORKDIR /usr/src/app
-COPY ./go.mod /usr/src/app/
+WORKDIR /usr/internal/app
+COPY ./go.mod /usr/internal/app/
 RUN go mod tidy
 COPY . .
